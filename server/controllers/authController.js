@@ -35,7 +35,7 @@ const token =  jwt.sign({id: newUser._id} ,  process.env.JWT_SECRET, {expiresIn:
 
 res.cookie("token", token ,{
     httpOnly: true,
-    secure:process.env.NODE_ENV !== "production",
+    secure:process.env.NODE_ENV === "production",
     sameSite: "none" ,
     maxAge: 1000 * 60 * 60 * 24 * 7,
 })
@@ -82,7 +82,7 @@ const token =  jwt.sign({id: user._id} ,  process.env.JWT_SECRET, {expiresIn:"7d
 
 res.cookie("token", token ,{
     httpOnly: true,
-    secure:process.env.NODE_ENV !== "production",
+    secure:process.env.NODE_ENV === "production",
     sameSite:"none",
     maxAge: 1000 * 60 * 60 * 24 * 7,
 })
@@ -102,7 +102,7 @@ export const logout =async (req ,res)=>{
         
         res.clearCookie("token", {
             httpOnly: true,
-            secure: process.env.NODE_ENV!== "production",
+            secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production"? "none" : "strict",
         });
 
